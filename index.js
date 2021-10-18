@@ -229,6 +229,10 @@ app.get('/profil/:para', function(req,res){
 	res.sendfile(__dirname+"/backoffice/profil.html");
 });
 
+app.get('/inscription', function(req,res){
+	res.sendfile(__dirname+"/inscription.html");
+});
+
 const port = process.env.PORT;
 
 /*app.listen(port, ()=>{

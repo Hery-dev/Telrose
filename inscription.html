@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="assets/bootstrap.min.js" ></script> -->
+        
+    <link rel="stylesheet" href="assets/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="./angular.min.js"></script>
+    <script src="./controller.js"></script>
+    <link rel="stylesheet" href="./Styles.css">
+        <title>TelRoseCoquin</title>
+    
+    </head>
+<body>
+   
+        <div class="container-fluid-p-0">
+            <div class="menu1">
+                <div class="row menuheader">
+                    <div class="col-2 logo">
+                        <a href="/">
+                            <img src="assets/img/logo.png" alt="" class="logo">
+                        </a>
+                        
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2 btnconnect" >
+                        <p style="color: white;"><a href="/inscription" style="margin-right: 20px;text-decoration: none;color: white;"> INSCRIPTION</a> 
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                        <img src="assets/img/icone-profil.png" alt="" class="profil">
+                        </a></p>
+                    </div>
+                </div>
+
+                <!--modal-->
+    <div class="modal fade" id="exampleModal" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+           
+            <div>
+                <div class="row">
+                    <div class="col-6 popup">
+                        <h3 class="titreInscri"> Connexion</h3>
+                       <hr class="ligne">
+                       <div class="divLorem">
+                        <span class="textLorem">
+                            L’inscription à notre site n’est pas obligatoire. Par contre, si vous voulez bénéficier de tous les services qu’on offre ce site, il est plus que recommandé de vous inscrire. 
+                           </span>
+                       </div>
+                       
+                    </div>
+                    <div class="col-6">
+                        <div class="row menuConnex">
+                            <div class="formConnex">
+                                <form>
+                                    <h6 style="margin-left: 15px;">Nom ou Pseudo</h6>
+                                    <input type="text" name="mon" class="form-control champ" ng-model="f_login_user.nom_user" placeholder="Votre nom d'utilistaeur...">
+                                    <h6 style="margin-left: 15px;">Mot de passe</h6>
+                                    <input type="password" name="mon" class="form-control champ" ng-model="f_login_user.password" placeholder="Votre password..."> 
+                                    <p>
+                                        <input type="checkbox" id="exampleInputPassword1">
+                                        Mot de pass oublié?
+                                    </p>
+                                    <p style="font-size:13px;color:red;" ng-show="error_text">Identifiant ou mot de passe incorrect!!</p>
+                                    <p style="color: red;font-size: 12px;" ng-show="champNonvalid">Veuillez remplir toutes les champs</p>
+                                    <img src="assets/img/Connectez.png" alt="" style="margin-left:45px;margin-top:50px" ng-click="login()">
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </header>
+                <div class="container" style="background-image: url('assets/img/bgOpacInscrit.png');margin-top: 10%;">
+                    <form>
+                        <div style="margin-left: 15%;margin-right: 15%;">
+                            <div style="text-align: center;">
+                                <h6 style="color: white;font-size: 35px;font-weight: bold;padding-top: 10%;">Inscription</h6>
+                            </div>
+                            <div class="row" style="padding-bottom: 20%;margin-top: 10%;">
+                                <div class="col-6" style="border-right: 1px solid white;">
+                                    <div>
+                                        <div style="margin-bottom: 20px;">
+                                            <input type="text" class="form-control champinscri" style="color: white;" placeholder="Nom...">
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <input type="number" class="form-control champinscri" style="color: white;" placeholder="Ages...">
+                                                </div>
+                                                <div class="col-6">
+                                                    <select name="" id="" class="form-control champinscri" placeholder="Sexe...">
+                                                        <option value="" disabled selected>Votre sexe...</option>
+                                                        <option value="">Homme</option>
+                                                        <option value="">Femme</option>
+                                                        <option value="">Lesbienne</option>
+                                                        <option value="">Gay</option>
+                                                        <option value="">Bisexuelle</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <select name="" id="" class="form-control champinscri">
+                                                <option value="" disabled selected>Votre catégorie...</option>
+                                                <option value="">Asiat</option>
+                                                <option value="">Blonde</option>
+                                            </select>
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <input type="email" class="form-control champinscri" style="color: white;" placeholder="Votre adress email...">
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+    
+                                <div class="col-6">
+                                    <div>
+                                        <div style="margin-bottom: 20px;">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input"  style="color: white;">
+                                                <label class="custom-file-label" for="customFile">Ajouter votre photo...</label>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <input type="password" class="form-control champinscri" style="color: white;"  placeholder="Votre mot de passe...">
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <input type="password" class="form-control champinscri" style="color: white;"  placeholder="Confirmer mot de passe...">
+                                        </div>
+                                        <div style="margin-bottom: 20px;">
+                                            <textarea class="form-control champinscri" style="color: white;" placeholder="A propos de vous..." rows="3"></textarea>
+                                        </div>
+
+                                       <img src="assets/img/Inscription.png" alt="" style="float: right;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        
+                      </form>
+                </div>
+            </div>
+
+            <footer style="margin-top: 20px;">
+
+                <div class="row" style="background-image: url('assets/img/footerbg.png');text-align: center; color: white;background-repeat: no-repeat;
+                background-size: cover;">
+                    <div class="col-3">
+                    <p><b>Téléphone Rose</b></p>    
+                    <p>telrose</p>    
+                    <p>telrose</p>    
+                    <p>telrose</p>    
+                    </div>
+                    <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                        <p>telrose</p>    
+                        <p>telrose</p>    
+                        <p>telrose</p>  </div>
+                    <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                        <p>telrose</p>    
+                        <p>telrose</p>    
+                        <p>telrose</p>  </div>
+                    <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                        <p>telrose</p>    
+                        <p>telrose</p>    
+                        <p>telrose</p>  </div>
+                </div>
+            
+            </footer>
+       
+    </div>
+    
+</body>
+</html>
