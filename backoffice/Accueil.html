@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELROSE</title>
+    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../Styles.css">
+        <script src="../angular.min.js"></script>
+        <script src="../controller.js"></script>
+    </head>
+
+    <body ng-app="monApp" ng-controller="usercontroller">
+        <Table>
+            <tr>
+                <th>Nom</th>
+                <th>Categorie</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>Message</th>
+            </tr>
+            <tr ng-repeat="list in listuser">
+                <td>{{list.nom_user}}</td>
+                <td>{{list.categorie}}</td>
+                <td>{{list.ville}}</td>
+                <td>{{list.pays}}</td>
+                <td><input type="button" value="Contacter" ng-click="actionner(list.id_user)"> </td>
+            </tr>
+        </Table>
+
+        <form ng-show="messageshow">
+            <input type="text" ng-model="f_message.msg">
+            <input type="text" ng-model="toid" hidden>
+            <input type="button" value="Envoyer" ng-click="send_message()">
+        </form>
+
+        <div ng-repeat="u in user">
+            <p>User : {{ u.nom_user }}</p>
+        </div>
+
+        <form action="http://localhost:8000/upload" method="post" enctype="multipart/form-data">
+            <input type="text" name="titre">
+            
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" name="myImg" >
+                <label class="custom-file-label" for="customFile">Choisissez une photo</label>
+              </div>
+            <input type="submit" value="Tester l'image">
+        </form>
+
+        <div id="messagebox">
+            
+        </div>
+        
+       
+        <script src="/socket.io/socket.io.js"></script>
+    </body>
+</html>

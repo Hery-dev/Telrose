@@ -1,0 +1,203 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.menu{
+    /* background-image: url("assets/img/bg-header-1.png"); */
+    background-color: black;
+    background-image: url("assets/img/bg-header5.png");
+
+}
+.logo{
+    text-align: center;
+    margin-top: 7px;
+}
+.btnconnect{
+    text-align: center;
+    margin-top: 15px;
+}
+.menuheader{
+    background-color: black;
+    opacity: 53%;
+    height: 75px;
+}
+.container-fluid .row .panier{
+    padding-left: 900px;
+}
+.container-fluid .row .profil{
+    padding-left: 60px;
+}
+.container-fluid .row .logo{
+    padding-left: 50px;
+}
+.container-fluid-p-0 .Gtitre{
+    
+    text-align: center;
+    color: rgb(255, 255, 255);
+    padding-top: 220px;
+    padding-bottom: 220px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.container .menu{
+    padding-left: 400px;
+    background-color: #e48ebc;
+    border-radius: 0px 0px 30px 30px;
+    margin-top: 0px;
+    margin-bottom: 150px;
+}
+.container .navbar .navbar-nav{
+    padding-top: 15px;
+    color: white;
+    text-align: justify;
+}
+.titreHotesse{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.voirplus{
+    background-image: url("assets/img/10.png");
+    text-align: center;
+}
+.btnvoirplus{
+    margin-top: 200px;
+}
+.popup{
+    background-image: url("assets/img/femme.png");
+    text-align: center;
+    color: white;
+}
+.titreInscri{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+.ligne{
+    border-top: 1px solid;
+    margin-right: 70px;
+    margin-left: 70px;
+}
+.textLorem{
+    font-size: 12px;
+    text-align: justify;
+    
+}
+.divLorem{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+.menuConnex{
+    margin-top: 20px;
+}
+.formConnex{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.champ{
+    border-radius: 30px;
+}
+.categorie{
+    background-image: url("assets/img/headerBg2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+.cat1{
+    background-color: rgb(213, 223, 220);
+    margin-top: 250px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 20px 20px 0px 0px; 
+}
+.cat2{
+    text-align: center;
+    background-color: #e48ebc;
+    border-radius: 0px 0px 20px 20px;
+}
+#profil{
+    text-align: center;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+.detailprofil{
+    background-color: black; opacity: 50%;
+    color: white;
+    position: absolute;
+    top: 130px;
+    width: 250px;
+    left: 20px;
+}
+.detailprofilcat{
+    background-color: black; opacity: 50%;
+    color: white;
+    position: absolute;
+    top: 54%;
+    width: 100%;
+}
+.Autreprofil{
+    background-color: black; opacity: 50%;
+    color: white;
+    position: absolute;
+    top: 144px;
+    text-align: center;
+    width: 95%;
+}
+.bouttondetails{
+    padding: 2px;
+    border: 1px solid;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.bouttondetailscat{
+    height: 50%;
+    margin-right: 5px;
+    font-size: 11px;
+    border: 1px solid;
+    border-radius: 10px;
+    margin-top: 4px;
+    
+}
+.comment{
+    background-color:#303030 !important;
+    color: white;
+    text-align: center;
+    right: 10%;
+}
+.call2{
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+.abonne{
+    margin-top: 30px;
+}
+.findai:hover{
+    height: 125px;
+}
+.messag:hover{
+    height: 125px;
+}
+.cart:hover{
+    height: 125px;
+}
+#A:hover{
+    border: 4px solid palevioletred;
+    opacity: 90%;
+}
+#A{
+    height: 286px;
+}
+.Listemenu{
+    list-style-type: none;
+    padding: 0px 10px 10px 20px;
+}
+.itemmen:hover{
+    margin-left: 5px;
+    color: rgb(202, 22, 133);
+    margin-top: 13px;
+}
+.itemmen{
+    border-bottom: 1px solid white;
+    color: white;
+    margin-top: 10px;
+}

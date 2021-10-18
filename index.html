@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="assets/bootstrap.min.js" ></script> -->
+        
+    <link rel="stylesheet" href="assets/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="./angular.min.js"></script>
+    <script src="./controller.js"></script>
+    <link rel="stylesheet" href="./Styles.css">
+    <title>TelRoseCoquin</title>
+
+</head>
+<body ng-app="monApp" ng-controller="usercontroller">
+    <!-- header -->
+    <header>
+        <div class="container-fluid-p-0">
+            <div class="menu">
+                <div class="row menuheader">
+                    <div class="col-2 logo">
+                        <img src="assets/img/logo.png" alt="" class="logo">
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2 btnconnect" >
+                        <p style="color: white;">CONNEXION
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                        <img src="assets/img/icone-profil.png" alt="" class="profil">
+                        </a></p>
+                    </div>
+                </div>
+                <h1 class="Gtitre"><b>Nos hôtesses sexys</b> vous attendent<br>pour des conversations <b>très chaudes</b></h1> 
+             </div>
+       
+    </div>
+    <!--modal-->
+    <div class="modal fade" id="exampleModal" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+           
+            <div>
+                <div class="row">
+                    <div class="col-6 popup">
+                        <h3 class="titreInscri"> Connexion</h3>
+                       <hr class="ligne">
+                       <div class="divLorem">
+                        <span class="textLorem">
+                            L’inscription à notre site n’est pas obligatoire. Par contre, si vous voulez bénéficier de tous les services qu’on offre ce site, il est plus que recommandé de vous inscrire. 
+                           </span>
+                       </div>
+                       
+                    </div>
+                    <div class="col-6">
+                        <div class="row menuConnex">
+                            <div class="formConnex">
+                                <form>
+                                    <h6 style="margin-left: 15px;">Nom ou Pseudo</h6>
+                                    <input type="text" name="mon" class="form-control champ" ng-model="f_login_user.nom_user" placeholder="Votre nom d'utilistaeur...">
+                                    <h6 style="margin-left: 15px;">Mot de passe</h6>
+                                    <input type="password" name="mon" class="form-control champ" ng-model="f_login_user.password" placeholder="Votre password..."> 
+                                    <p>
+                                        <input type="checkbox" id="exampleInputPassword1">
+                                        Mot de pass oublié?
+                                    </p>
+                                    <p style="font-size:13px;color:red;" ng-show="error_text">Identifiant ou mot de passe incorrect!!</p>
+                                    <p style="color: red;font-size: 12px;" ng-show="champNonvalid">Veuillez remplir toutes les champs</p>
+                                    <img src="assets/img/Connectez.png" alt="" style="margin-left:45px;margin-top:50px" ng-click="login()">
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- fin header -->
+    <!-- body -->
+    <div class="container">
+        <div class="titreHotesse">
+            <h1>Nos genre d’Hôtesses</h1>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-3"><img id="A" src="assets/img/1.png" alt=""></div>
+            <div class="col-md-3"><img id="A" src="assets/img/2.png" alt=""></div>
+            <div class="col-md-3"><img id="A" src="assets/img/3.png" alt=""></div>
+            <div class="col-md-3"><img id="A" src="assets/img/4.png" alt=""></div>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-md-3"><img id="A" src="assets/img/5.png" alt=""></div>
+            <div class="col-md-3"><img id="A" src="assets/img/6.png" alt=""></div>
+            <div class="col-md-3"><img id="A" src="assets/img/7.png" alt=""></div>
+            <div class="col-md-3"><img id="A" src="assets/img/8.png" alt=""></div>
+        </div>
+        <div class="row">   
+            <div class="col-md-3"><img id="A" src="assets/img/9.png" alt=""></div>
+            <div class="col-md-6 voirplus" style="left: 17px">
+                <div class="btnvoirplus">
+                   <img src="assets/img/Voir-Plus.png" alt="" style="height: 30px;" ng-click="voirhotesse()">
+                </div>
+                <div ng-show="hotessNonVlide">
+                    
+                    Veuillez vous <a href="#" data-toggle="modal" data-target="#exampleModal">Connecter</a> ou s'inscrire!
+                </div>
+            </div>
+            <div class="col-md-3"><img id="A" src="assets/img/11.png" alt=""></div>
+        </div>
+        <div class="call2">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-4" style="left:-4%;">
+                    <img src="assets/img/call.png" alt="">
+                </div>
+                <div class="col-6 comment">
+                    <h4 style="margin-bottom: 50px; margin-top: 60px; font-size: 35px;">Comment passez vos appel?</h4>
+                    <p style="margin-right: 40px; margin-left: 40px;">
+                    Ça y est, vous avez choisi votre hôtesse pour des échanges coquins. Il vous faut l’appeler maintenant. Voici comment procéder ? Rien de plus simple :
+                    Sur le bas de la page de l’hôtesse, un numéro de téléphone y est donné. Si vous n’avez pas encore acheté de crédits, il vous suffit d’en acheter. Un large choix d’offres vous est proposé. 
+                    Une fois fait, il vous suffit de composer le numéro de votre hôtesse et de passer de bons moments en sa compagnie.
+                    </p>
+                    <img src="assets/img/Inscrivez-vous1.png" alt="" style="margin-top: 30px;">
+                </div>
+            </div>
+        
+        </div>
+        <div class="row Credit" style="margin-bottom: 100px;margin-top: 94px;">
+            <div class="col-6">
+                <img src="assets/img/phone.png" alt="" style="height:650px;">
+            </div>
+            <div class="col-6" style="background-color: #ff6682;">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 style="
+                        font-size: 42px;margin-left: 70px;margin-top: 50px;margin-bottom: 40px; color: white;">Credit</h5>
+                    </div>
+                    <div class="col-6">
+                        <img src="assets/img/icone-carte.png" alt=""
+                        style="font-size: 42px;margin-left:143px;margin-top: 50px;margin-bottom: 40px;">
+                    </div>
+                </div>
+                
+                <p style="margin-right: 30px;margin-left: 30px;color: white;">
+                    Lorem Ipsum est simplement un texte factice de l'industrie de l'impression et de la composition.
+                    Lorem Ipsum est le texte factice standard de l'industrie depuis les années 1500, lorsqu'un imprimeur
+                    inconnu a pris une galère de caractères et l'a brouillé pour en faire un livre spécimen de caractères.
+                    Il a survécu non seulement à cinq siècles, mais aussi au saut dans la composition électronique, restant
+                    essentiellement inchangé. Il a été popularisé dans les années 1960 avec la sortie des feuilles Letraset
+                    contenant des passages de Lorem Ipsum,
+                    et plus récemment avec des logiciels de PAO comme Aldus PageMaker incluant des versions de Lorem Ipsum.
+                </p>
+                <div>
+                <img src="assets/img/toutcarte.png" alt="" style="height: 281px;margin-left: -15px;position: relative;">
+                <img src="assets/img/Savoir-plus.png" alt="" style="position: absolute; top: 590px; left: 48px;">
+            </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;">
+            <div class="col-4">
+                <img src="assets/img/abonnement1.png" alt="" style="height:445px; position: relative;">
+                <img class="findai" src="assets/img/tel.png" alt="" style="top: 92px; position: absolute; left: 139px;">
+                <p style="font-size: 14px; position: absolute; top: 289px; color: rgb(255, 255, 255);margin-left: 8px;margin-right: 18px;">
+                    <b>VIP</b> is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    bled it to make a type specimen book.  
+                </p>
+                <h5 style="position: absolute;top: 409px;left: 145px; color: white;">Savoir-plus »</h5>
+            </div>
+            <div class="col-4">
+                <img src="assets/img/abonnement2.png" alt="" style="height:445px; position: relative;">
+                <img class="messag" src="assets/img/msg.png" alt="" style="top: 92px; position: absolute; left: 139px;">
+                <p style="font-size: 14px; position: absolute; top: 289px; color: rgb(255, 255, 255);margin-left: 8px;margin-right: 18px;">
+                    <b>VIP</b> is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    bled it to make a type specimen book.  
+                </p>
+                <h5 style="position: absolute;top: 409px;left: 145px; color: white;">Savoir-plus »</h5>
+            </div>
+            <div class="col-4">
+                <img src="assets/img/abonnement3.png" alt="" style="height:445px; position: relative;">
+                <img class="cart" src="assets/img/cart.png" alt="" style="top: 92px; position: absolute; left: 139px;">
+                <p style="font-size: 14px; position: absolute; top: 289px; color: rgb(255, 255, 255);margin-left: 8px;margin-right: 18px;">
+                    <b>VIP</b> is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    bled it to make a type specimen book.  
+                </p>
+                <h5 style="position: absolute;top: 409px;left: 145px; color: white;">Savoir-plus »</h5>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <footer style="margin-top: 20px;">
+
+        <div class="row" style="background-image: url('assets/img/footerbg.png');text-align: center; color: white;background-repeat: no-repeat;
+        background-size: cover;">
+            <div class="col-3">
+            <p><b>Téléphone Rose</b></p>    
+            <p>telrose</p>    
+            <p>telrose</p>    
+            <p>telrose</p>    
+            </div>
+            <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                <p>telrose</p>    
+                <p>telrose</p>    
+                <p>telrose</p>  </div>
+            <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                <p>telrose</p>    
+                <p>telrose</p>    
+                <p>telrose</p>  </div>
+            <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                <p>telrose</p>    
+                <p>telrose</p>    
+                <p>telrose</p>  </div>
+        </div>
+    
+    </footer>
+
+    <!--fin body -->
+
+ 
+    
+    <!-- footer -->
+    
+    <!-- fin footer -->
+
+    <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>

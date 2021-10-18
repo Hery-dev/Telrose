@@ -1,0 +1,100 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="../angular.min.js"></script>
+        <script src="../controller.js"></script>
+    </head>
+    <body ng-app="monApp" ng-controller="usercontroller">
+        <h2>Inscription </h2>
+        
+
+        <form>
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Nom</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.nom_user">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Mot de passe</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.password">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Pays</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.pays">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Ville</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.ville">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Adress</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.adress">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Categorie</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.categorie">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Sexe</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.sexe">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Contact</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.contact">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>A propos</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_register_user.apropos">
+                </li> 
+            </ul>
+
+            <input type="button" name="btn_ajout" value="Tenter ma chance" ng-click="register()">
+            <a href="/sing">Connectez vous ici</a>
+        </form>
+    </body>
+</html>

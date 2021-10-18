@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="../angular.min.js"></script>
+        <script src="../controller.js"></script>
+    </head>
+    <body ng-app="monApp" ng-controller="usercontroller">
+        <h2>Login </h2>
+        
+
+        <form>
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Nom</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_login_user.nom_user">
+                </li> 
+            </ul>
+
+            <ul>
+                <li style="display: inline-block;">
+                    <p>Mot de passe</p>
+                </li> 
+               <li style="display: inline-block;">
+                    <input type="text" name="mon" ng-model="f_login_user.password">
+                </li> 
+            </ul>
+
+            <input type="button" name="btn_ajout" value="Login" ng-click="login()">
+            <a href="/backoffice/Inscription.html">Inscription ici</a>
+        </form>
+    </body>
+</html>
