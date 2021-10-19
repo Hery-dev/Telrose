@@ -20,7 +20,7 @@
         <title>TelRoseCoquin</title>
     
     </head>
-<body>
+<body ng-app="monApp" ng-controller="usercontroller">
    
         <div class="container-fluid-p-0">
             <div class="menu1">
@@ -85,7 +85,25 @@
       </div>
     </header>
                 <div class="container" style="background-image: url('assets/img/bgOpacInscrit.png');margin-top: 10%;">
+                   
+                    <!--
                     <form>
+                        <h6 style="margin-left: 15px;">Nom ou Pseudo</h6>
+                        <input type="text" name="mon" class="form-control champ" ng-model="f_create_user.nom_user" placeholder="Votre nom d'utilistaeur...">
+                        <h6 style="margin-left: 15px;">Mot de passe</h6>
+                        <input type="password" name="mon" class="form-control champ" ng-model="f_create_user.password" placeholder="Votre password..."> 
+                        <p>
+                            <input type="checkbox" id="exampleInputPassword1">
+                            Mot de pass oublié?
+                        </p>
+                        <p style="font-size:13px;color:red;" ng-show="error_text">Identifiant ou mot de passe incorrect!!</p>
+                        <p style="color: red;font-size: 12px;" ng-show="champNonvalid">Veuillez remplir toutes les champs</p>
+                        <img src="assets/img/Connectez.png" alt="" style="margin-left:45px;margin-top:50px" ng-click="register()">
+                    </form>
+                    <img src="assets/img/Inscription.png" alt="" style="float: right;" ng-click="register()">
+                    -->
+
+                    <form action="http://localhost:8000/save" method="post" enctype="multipart/form-data">
                         <div style="margin-left: 15%;margin-right: 15%;">
                             <div style="text-align: center;">
                                 <h6 style="color: white;font-size: 35px;font-weight: bold;padding-top: 10%;">Inscription</h6>
@@ -94,35 +112,52 @@
                                 <div class="col-6" style="border-right: 1px solid white;">
                                     <div>
                                         <div style="margin-bottom: 20px;">
-                                            <input type="text" class="form-control champinscri" style="color: white;" placeholder="Nom...">
+                                            <input type="text" class="form-control champinscri" name="nom" style="color: white;" placeholder="Nom...">
                                         </div>
                                         <div style="margin-bottom: 20px;">
                                             <div class="row">
                                                 <div class="col-6">
-                                                    <input type="number" class="form-control champinscri" style="color: white;" placeholder="Ages...">
+                                                    <input type="number" class="form-control champinscri" name="age" style="color: white;" placeholder="Ages...">
                                                 </div>
                                                 <div class="col-6">
-                                                    <select name="" id="" class="form-control champinscri" placeholder="Sexe...">
+                                                    <select id="" class="form-control champinscri" name="sexe" placeholder="Sexe...">
                                                         <option value="" disabled selected>Votre sexe...</option>
-                                                        <option value="">Homme</option>
-                                                        <option value="">Femme</option>
-                                                        <option value="">Lesbienne</option>
-                                                        <option value="">Gay</option>
-                                                        <option value="">Bisexuelle</option>
+                                                        <option value="home">Homme</option>
+                                                        <option value="femme">Femme</option>
+                                                        <option value="lesbienne">Lesbienne</option>
+                                                        <option value="gay">Gay</option>
+                                                        <option value="bisexe">Bisexuelle</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             
                                         </div>
                                         <div style="margin-bottom: 20px;">
-                                            <select name="" id="" class="form-control champinscri">
+                                            <select id="" name="categorie" class="form-control champinscri">
                                                 <option value="" disabled selected>Votre catégorie...</option>
-                                                <option value="">Asiat</option>
-                                                <option value="">Blonde</option>
+                                                <option value="ados">Ados</option>
+                                                <option value="asiat">Asiat</option>
+                                                <option value="bisexelle">Bisexuelle</option>
+                                                <option value="black">Black</option>
+                                                <option value="blonde">Blonde</option>
+                                                <option value="couple">Couple</option>
+                                                <option value="cougar">Cougar</option>
+                                                <option value="dominatrice">Dominatrice</option>
+                                                <option value="etudiant">Etudiant</option>
+                                                <option value="gay">Gay</option>
+                                                <option value="gros_sein">Gros sein</option>
+                                                <option value="latina">Latina</option>
+                                                <option value="lesbienne">Lesbienne</option>
+                                                <option value="mamie">Mamie</option>
+                                                <option value="mature">Mature</option>
+                                                <option value="mince">Mince</option>
+                                                <option value="mignonne">Mignonne</option>
+                                                <option value="ronde">Ronde</option>
+                                                <option value="transexuelle">Transexuelle</option>
                                             </select>
                                         </div>
                                         <div style="margin-bottom: 20px;">
-                                            <input type="email" class="form-control champinscri" style="color: white;" placeholder="Votre adress email...">
+                                            <input type="email" class="form-control champinscri" name="email" style="color: white;" placeholder="Votre adress email...">
                                         </div>
                                         
                                     </div>
@@ -132,21 +167,21 @@
                                     <div>
                                         <div style="margin-bottom: 20px;">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input"  style="color: white;">
+                                                <input type="file" class="custom-file-input" id="customFile" name="myImg">
                                                 <label class="custom-file-label" for="customFile">Ajouter votre photo...</label>
                                             </div>
                                         </div>
                                         <div style="margin-bottom: 20px;">
-                                            <input type="password" class="form-control champinscri" style="color: white;"  placeholder="Votre mot de passe...">
+                                            <input type="password" class="form-control champinscri" name="pass" style="color: white;"  placeholder="Votre mot de passe...">
                                         </div>
                                         <div style="margin-bottom: 20px;">
-                                            <input type="password" class="form-control champinscri" style="color: white;"  placeholder="Confirmer mot de passe...">
+                                            <input type="password" class="form-control champinscri" ng-model="passverif" style="color: white;"  placeholder="Confirmer mot de passe...">
                                         </div>
                                         <div style="margin-bottom: 20px;">
-                                            <textarea class="form-control champinscri" style="color: white;" placeholder="A propos de vous..." rows="3"></textarea>
+                                            <textarea class="form-control champinscri" name="apropos" style="color: white;" placeholder="A propos de vous..." rows="3"></textarea>
                                         </div>
-
-                                       <img src="assets/img/Inscription.png" alt="" style="float: right;">
+                                        <input type="submit" value="Save">
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -156,6 +191,9 @@
                         
                         
                       </form>
+                   
+                    
+                    
                 </div>
             </div>
 
@@ -186,6 +224,6 @@
             </footer>
        
     </div>
-    
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

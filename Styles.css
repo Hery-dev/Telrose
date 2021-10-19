@@ -8,6 +8,15 @@ body{
     background-image: url("assets/img/bg-header5.png");
 
 }
+
+.menu1{
+    /* background-image: url("assets/img/bg-header-1.png"); */
+    background-color: black;
+    background-image: url("assets/img/bg-inscrit.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 15%;
+}
 .logo{
     text-align: center;
     margin-top: 7px;
@@ -96,12 +105,18 @@ body{
 .champ{
     border-radius: 30px;
 }
+.champinscri{
+    background: transparent !important;
+    color: white;
+}
 .categorie{
     background-image: url("assets/img/headerBg2.png");
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
 }
+
+
 .cat1{
     background-color: rgb(213, 223, 220);
     margin-top: 250px;
@@ -139,7 +154,7 @@ body{
     background-color: black; opacity: 50%;
     color: white;
     position: absolute;
-    top: 144px;
+    top: 34%;
     text-align: center;
     width: 95%;
 }
@@ -156,7 +171,6 @@ body{
     border: 1px solid;
     border-radius: 10px;
     margin-top: 4px;
-    
 }
 .comment{
     background-color:#303030 !important;

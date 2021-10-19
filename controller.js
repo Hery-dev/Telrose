@@ -2,6 +2,7 @@ var app=angular.module("monApp",[]);
 
 app.controller("usercontroller",function($scope,$http){
 
+
     const socket = io();
     $scope.username="";
     $scope.userid="";
@@ -80,6 +81,48 @@ app.controller("usercontroller",function($scope,$http){
 
     $scope.lister();
 
+    $scope.listerec=(rec)=>{
+        $http.get('/listerec/'+rec)
+		.then(function(data){
+			$scope.listuser=data.data;
+		});
+    }
+    
+    $scope.voir=(id)=>{
+        $http.get('/profil/'+id)
+		.then(function(data){
+            var respgUrl = "http://" + window.location.host + "/detail";
+            window.location = respgUrl;
+		});
+    }
+
+    $scope.detail=function(){
+        $http.get('/detailprofil')
+		.then(function(data){
+            if(data.data=="NON"){
+                $scope.detailuser="";
+            }
+            else{
+                $scope.detailuser=data.data;
+            }
+			
+		});
+    }
+    $scope.detail();
+
+    $scope.detailencore=function(){
+        $http.get('/detailprofilencore')
+		.then(function(data){
+            if(data.data=="NON"){
+                $scope.detailuserencore="";
+            }
+            else{
+                $scope.detailuserencore=data.data;
+            }
+			
+		});
+    }
+    $scope.detailencore();
     $scope.ajouter=function(){
 		if ($scope.f_ajout_user.nom_user!=null && $scope.f_ajout_user.password!=null && $scope.f_ajout_user.pays!=null && $scope.f_ajout_user.ville!=null && $scope.f_ajout_user.sexe!=null && $scope.f_ajout_user.categorie!=null) {
 			$http.post('/register',$scope.f_ajout_user)
@@ -98,6 +141,7 @@ app.controller("usercontroller",function($scope,$http){
 		
 	}
 
+    /*
     $scope.register=function(){
         if($scope.f_register_user.nom_user!=null && $scope.f_register_user.password!=null && $scope.f_register_user.pays!=null && $scope.f_register_user.ville!=null && $scope.f_register_user.categorie!=null && $scope.f_register_user.sexe!=null){
             $http.post('/register', $scope.f_register_user)
@@ -113,7 +157,7 @@ app.controller("usercontroller",function($scope,$http){
             });
         }
         
-    }
+    }*/
 
     socket.on("new user", function (data) {
         if($scope.username==data["id_user"]){
@@ -186,5 +230,12 @@ app.controller("usercontroller",function($scope,$http){
 
     $scope.voirprofil=(nom)=>{
         alert(nom);
+    }
+
+    $scope.register=function(){
+       $http.post('/upload', "ok")
+       .then(function(data){
+           alert(data);
+       });
     }
 });

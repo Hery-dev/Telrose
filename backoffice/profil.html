@@ -21,7 +21,9 @@
         <div class="categorie">
             <div class="row menuheader">
                 <div class="col-2 logo">
+                    <a href="/">
                     <img src="../assets/img/logo.png" alt="" class="logo">
+                </a>
                 </div>
                 <div class="col-8"></div>
                 <div class="col-2 btnconnect" >
@@ -74,22 +76,22 @@
     </div>
     <!-- fin header -->
     <!-- profil -->
-    <div class="container">
+    <div class="container" ng-repeat="list in detailuser">
         <div class="row" style="margin-top: 50px;">
             <div class="col-6" style="margin: 0px;padding: 5px;">
                 <div style="background-color: rgb(170, 170, 170); text-align: center;">
                 <div class="row"style=" margin: left;margin-left: 50px; margin-right: 50px;">
                     <div class="col-4"style="margin-top: 30px !important;">
-                        <h3>JENNIFER</h3>
+                        <h3>{{ list.nom_user }}</h3>
                     </div>
                     <div class="col-4"style="margin-top: 30px !important;">
-                        <p><img src="../assets/img/iconefrance.png" alt="">(24 ans)</p>
+                        <p><img src="../assets/img/iconefrance.png" alt="">({{list.age}} ans)</p>
                     </div>
                     <div class="col-4"style="margin-top: 30px !important;">
                         <h6> <img src="../assets/img/icone-connecté.png" alt=""> connecté</h6>
                     </div>
                 </div>
-                <p style="margin-top: 20px;">Une chaude étudiante au Tel Rose Coquin</p>
+                <p style="margin-top: 20px;">{{list.apropos}}</p>
                 <div class="row">
                     <div class="col-6"style="margin-top: 20px !important;">
                         <img src="../assets/img/appelProfil.png" alt="">
@@ -105,10 +107,10 @@
 
             <div style="background-color: black; text-align: center;margin-top: 10px;">
                 <p style="color: white;text-align: justify;padding: 20px;font-size: 15px;">
-                    Le sexe sans conditions, c’est le rêve de beaucoup d’hommes. Se laisser guider par le feeling et prendre le maximum de plaisir dans toutes les positions imaginables. JENNIFER, une chaude étudiante au Tel Rose Coquin a ce quelque chose en plus qui font vibrer tous les hommes avec qui elle  eu le temps de discuter. Après des heures de plaisir au tel, ils sont tous partis les couilles bien vides avec le grand sentiment d’être entièrement satisfaits de ce qu’elle leur avait fait.
+                    Le sexe sans conditions, c’est le rêve de beaucoup d’hommes. Se laisser guider par le feeling et prendre le maximum de plaisir dans toutes les positions imaginables. {{ list.nom_user }}, une chaude étudiante au Tel Rose Coquin a ce quelque chose en plus qui font vibrer tous les hommes avec qui elle  eu le temps de discuter. Après des heures de plaisir au tel, ils sont tous partis les couilles bien vides avec le grand sentiment d’être entièrement satisfaits de ce qu’elle leur avait fait.
                 </p>
                 <p style="color: white;text-align: justify;padding: 20px;font-size: 15px;">
-                    Jennifer est une jeune et chaude étudiante au Tel Rose Coquin bien dans sa peau et très entreprenante aussi bien au lit qu’au tel. Elle ne se lasse jamais de donner du plaisir à quiconque en cherche. Personne ne résiste à son joli minois.  Lorsqu’elle commence à faire son show, on ressent vite monter la pression jusqu’à faire exploser les boutons des braguettes. Entendre son mec hurler de plaisir au bout du fil l’excite comme une petite folle. Elle a les mains très baladeuses et peut très bien s’occuper des queues avec une bonne gorge profonde. Mais ce qu’elle préfère par-dessus tout, ce sont les grosses bites de black qui lui défoncent les trous. Etre prise en levrette, c’est son plus grand plaisir, mais elle adore aussi qu’on lui lèche sa chatte bien dégoulinante.  Avec elle, tu n’auras pas le temps de t’ennuyer !
+                    {{ list.nom_user }} est {{ list.apropos }} au Tel Rose Coquin bien dans sa peau et très entreprenante aussi bien au lit qu’au tel. Elle ne se lasse jamais de donner du plaisir à quiconque en cherche. Personne ne résiste à son joli minois.  Lorsqu’elle commence à faire son show, on ressent vite monter la pression jusqu’à faire exploser les boutons des braguettes. Entendre son mec hurler de plaisir au bout du fil l’excite comme une petite folle. Elle a les mains très baladeuses et peut très bien s’occuper des queues avec une bonne gorge profonde. Mais ce qu’elle préfère par-dessus tout, ce sont les grosses bites de black qui lui défoncent les trous. Etre prise en levrette, c’est son plus grand plaisir, mais elle adore aussi qu’on lui lèche sa chatte bien dégoulinante.  Avec elle, tu n’auras pas le temps de t’ennuyer !
                 </p>
 
                 <p style="color: white;text-align: justify;padding: 20px;font-size: 15px;">
@@ -122,11 +124,11 @@
             </div>
             <div class="col-6"style="margin: 0px;padding: 5px;">
                 <div>
-                    <img src="../assets/img/75.png" alt="" style="width: 560px;height: 500px;">
+                    <img ng-src="../{{list.photo}}" alt="" style="width: 560px;height: 500px;">
 
                 </div>
-                
-                <div class="row" style="margin-left: auto;margin-top: 12px;">
+                <!--
+                    <div class="row" style="margin-left: auto;margin-top: 12px;">
                     <div class="col-3"style="margin: 0px;padding:0px">
                         
                         <img src="../assets/img/Photprofil1.png" alt=""style="height: 131px;width: 130px;">
@@ -141,6 +143,8 @@
                         <img src="../assets/img/photoprofil4.png" alt=""style="height: 131px;width: 130px;">
                     </div>
                 </div>
+                -->
+                
                 <div  style="margin-left: auto;margin-top: 12px;background-color: #e6e6e6;">
                     <div  style="text-align: center;">
                         <h4>Commentaires</h4>
@@ -188,53 +192,17 @@
         </div>
             <!-- autre hotesse -->
             <div>
-                <h4>autre hottesse</h4>
+                <h4>autre hottesse dans {{ list.categorie }}</h4>
             </div>
     <div class="row">
-        <div class="col-3" style="position: relative;">
-            <img src="../assets/img/AichaProfil.png" alt="">
+        <div class="col-3" style="position: relative;" ng-repeat="li in detailuserencore">
+            <img ng-src="../{{li.photo}}" alt="" style="height: 70%;width: 106%;">
             <div class="Autreprofil">
-                <h6>Aicha</h6>
-                <p style="font-size: 12px; height: 35px ">Beurette accro au sexe.
+                <h6>{{li.nom_user}}</h6>
+                <p style="font-size: 12px; height: 35px ">{{li.apropos}}
                 </p>
               <div style="margin-bottom: 20px;">
-                  <img src="../assets/img/Voir-profil.png" alt="">
-              </div>
-            </div>
-        </div>
-        <div class="col-3" style="position: relative;">
-            <img src="../assets/img/AssiaProfil.png" alt="">
-            <div class="Autreprofil">
-                <h6>Assia</h6>
-                <p style="font-size: 12px; height: 35px ">Beurette accro au sexe au 
-                    Tel Rose Coquin.
-                </p>
-              <div style="margin-bottom: 20px;">
-                  <img src="../assets/img/Voir-profil.png" alt="">
-              </div>
-            </div>
-        </div>
-        <div class="col-3" style="position: relative;">
-            <img src="../assets/img/AurelieProfil.png" alt="">
-            <div class="Autreprofil">
-                <h6>Aurelie</h6>
-                <p style="font-size: 12px; height: 35px ">Beurette accro au sexe au 
-                    Tel Rose Coquin.
-                </p>
-              <div style="margin-bottom: 20px;">
-                  <img src="../assets/img/Voir-profil.png" alt="">
-              </div>
-            </div>
-        </div>
-        <div class="col-3" style="position: relative;">
-            <img src="../assets/img/BettyProfil.png" alt="">
-            <div class="Autreprofil">
-                <h6>Betty</h6>
-                <p style="font-size: 12px; height: 35px ">Beurette accro au sexe au 
-                    Tel Rose Coquin.
-                </p>
-              <div style="margin-bottom: 20px;">
-                  <img src="../assets/img/Voir-profil.png" alt="">
+                  <img src="../assets/img/Voir-profil.png" alt="" ng-click="voir(li.id_user)">
               </div>
             </div>
         </div>
@@ -242,7 +210,7 @@
     <!-- fin autre hotesse -->
     </div>
     <!-- fin profil -->
-
+    
     <footer style="margin-top: 20px;">
 
         <div class="row" style="background-image: url('../assets/img/footerbg.png');text-align: center; color: white;background-repeat: no-repeat;

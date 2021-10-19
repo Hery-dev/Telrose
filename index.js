@@ -80,7 +80,7 @@ const storage = multer.diskStorage({
             return cb(err);
         } 
 		else {
-            cb(null, req.body.titre+""+file.originalname);
+            cb(null, req.body.nom+""+file.originalname);
         }
 		
 	}
@@ -93,14 +93,38 @@ const upload = multer({
 
 app.use('/',express.static(__dirname+'/'));
 
-app.use(express.static('assets'));
-
-app.post("/upload", upload.single("myImg"),(req,res,next)=>{
+app.post("/save", upload.single("myImg"),(req,res,next)=>{
 	if(req.file){
 		const pathname = req.file.path;
-		res.send(pathname);
-		//res.sendfile(__dirname+'/backoffice/Accueil.html');
-		//res.send("ok");
+		console.log(req.body.nom);
+		console.log(req.body.age);
+		console.log(req.body.sexe);
+		console.log(req.body.categorie);
+		console.log(req.body.email);
+		console.log(req.body.pass);
+		console.log(req.body.apropos);
+		var sql = "INSERT INTO user(nom_user,age,password,email,categorie,sexe,apropos,photo) VALUES('"+req.body.nom +"','"+req.body.age+"','"+req.body.pass+"','"+req.body.email+"','"+req.body.categorie+"','"+req.body.sexe +"','"+req.body.apropos+"','"+pathname+"')";
+		connection.query(sql,function(err,resultat){
+			if (err) {
+				console.log(err);
+				res.send('err');
+				
+			}
+			else{
+				console.log("succées!");
+				var fect="SELECT * FROM user WHERE nom_user = '"+req.body.nom+"';";
+				connection.query(fect, (err,result)=>{
+					req.session.userid=result[0]["id_user"];
+					req.session.categorie=req.body.categorie;
+					req.session.sexe=req.body.sexe;
+					res.redirect("/membres");
+				});
+				
+			}
+		});
+	}
+	else{
+		res.sendFile(__dirname+"/inscription.html");
 	}
 });
 
@@ -109,8 +133,8 @@ app.post("/upload", upload.single("myImg"),(req,res,next)=>{
 
 app.get('/membres', function(req, res){
 	sess = req.session;
-	if(sess.userid){
-		res.sendfile(__dirname+'/backoffice/categorie.html');
+	if(sess.userid && sess.categorie && sess.sexe){
+		res.sendfile(__dirname+'/categorie.html');
 		io.on('connection', (socket) =>{
 			console.log('a user connected');
 		
@@ -188,6 +212,8 @@ app.post('/login', urlencodedParser, function(req, res){
 		else{
 			if(JSON.stringify(resultat).length>2){
 				req.session.userid=resultat[0]["id_user"];
+				req.session.categorie=resultat[0]["categorie"];
+				req.session.sexe=resultat[0]["sexe"];
 				res.send(resultat);
 			}
 			else{
@@ -201,7 +227,23 @@ app.post('/login', urlencodedParser, function(req, res){
 
 // LISTE USER
 app.get('/listeuser',function(req,res){
-	var sql="SELECT * FROM user";
+	sess=req.session;
+	if(sess.userid && sess.categorie && sess.sexe){
+		var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND categorie='"+sess.categorie+"';";
+	connection.query(sql,function(err,resultat){
+		if (err) {
+			res.send('err');
+		}
+		else{
+			res.json(resultat);
+		}
+	});
+	}
+});
+
+app.get('/listerec/:para', function(req,res){
+	console.log(req.params.para);
+	var sql="SELECT * FROM user WHERE sexe LIKE '%"+req.params.para+"%' OR categorie LIKE '%"+req.params.para+"%'";
 	connection.query(sql,function(err,resultat){
 		if (err) {
 			res.send('err');
@@ -226,7 +268,67 @@ app.get('/recherche/:para',function(req,res){
 });
 
 app.get('/profil/:para', function(req,res){
-	res.sendfile(__dirname+"/backoffice/profil.html");
+	console.log(req.params.para);
+	var sql="SELECT * FROM user WHERE id_user LIKE '%"+req.params.para+"';";
+	connection.query(sql,function(err,resultat){
+		if (err) {
+			res.send('err');
+		}
+		else{
+			req.session.toid=resultat["0"]["id_user"];
+			req.session.categorietoid=resultat["0"]["categorie"];
+			res.json(resultat);
+		}
+	});
+	//res.sendfile(__dirname+"/backoffice/profil.html");
+});
+
+app.get('/detail', function(req,res){
+	sess=req.session;
+	if(sess.userid && sess.categorie && sess.sexe && sess.toid){
+		res.sendfile(__dirname+"/backoffice/profil.html");
+	}
+	else{
+		res.redirect("/");
+	}
+});
+
+app.get('/detailprofil', function(req,res){
+	sess=req.session;
+	if(sess.userid && sess.categorie && sess.sexe && sess.toid){
+		var sql="SELECT * FROM user WHERE id_user LIKE '%"+sess.toid+"';";
+		connection.query(sql,function(err,resultat){
+			if (err) {
+				res.send('err');
+			}
+			else{
+				console.log(resultat);
+				res.json(resultat);
+			}
+		});
+	}
+	else{
+		res.send("NON");
+	}
+});
+
+app.get('/detailprofilencore', function(req,res){
+	sess=req.session;
+	if(sess.userid && sess.categorie && sess.sexe && sess.toid&& sess.categorietoid){
+		var sql="SELECT * FROM user WHERE id_user!='"+sess.toid+"' AND categorie='"+sess.categorietoid+"';";
+		connection.query(sql,function(err,resultat){
+			if (err) {
+				res.send('err');
+			}
+			else{
+				console.log(resultat);
+				res.json(resultat);
+			}
+		});
+	}
+	else{
+		res.send("NON");
+	}
 });
 
 app.get('/inscription', function(req,res){
