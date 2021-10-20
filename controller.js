@@ -140,24 +140,26 @@ app.controller("usercontroller",function($scope,$http){
 		}
 		
 	}
-
-    /*
-    $scope.register=function(){
-        if($scope.f_register_user.nom_user!=null && $scope.f_register_user.password!=null && $scope.f_register_user.pays!=null && $scope.f_register_user.ville!=null && $scope.f_register_user.categorie!=null && $scope.f_register_user.sexe!=null){
-            $http.post('/register', $scope.f_register_user)
-            .then(function(data){
-                if(data=='err'){
-                    alert("Il y a une erreur");
-                }
-                else{
-                    alert("Vous êtes bien enregistrer!!");
-                    var respgUrl = "http://" + window.location.host + "/membres";
-                    window.location = respgUrl;
-                }
-            });
+    $scope.passverif=false;
+    $scope.inscrire=function(){
+        if($scope.f_inscrire_user.pass!=null && $scope.f_inscrire_user.nom_user!=null && $scope.f_inscrire_user.passverif!=null){
+            if($scope.f_inscrire_user.pass!=$scope.f_inscrire_user.passverif){
+                $scope.passverif=true;
+            }
+            else{
+                $http.post('/saveclient', $scope.f_inscrire_user)
+                .then(function(data){
+                    if(data.data=="err"){
+                        alert("Non inscrit");
+                    }
+                    else{
+                        var respgUrl = "http://" + window.location.host + "/membres";
+                        window.location = respgUrl;
+                    }
+                });
+            }
         }
-        
-    }*/
+    }
 
     socket.on("new user", function (data) {
         if($scope.username==data["id_user"]){

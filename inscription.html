@@ -101,14 +101,17 @@
                         <img src="assets/img/Connectez.png" alt="" style="margin-left:45px;margin-top:50px" ng-click="register()">
                     </form>
                     <img src="assets/img/Inscription.png" alt="" style="float: right;" ng-click="register()">
+                     <div>
+                                        
                     -->
-
-                    <form action="http://localhost:8000/save" method="post" enctype="multipart/form-data">
-                        <div style="margin-left: 15%;margin-right: 15%;">
-                            <div style="text-align: center;">
-                                <h6 style="color: white;font-size: 35px;font-weight: bold;padding-top: 10%;">Inscription</h6>
-                            </div>
-                            <div class="row" style="padding-bottom: 20%;margin-top: 10%;">
+                    <div style="margin-left: 15%;margin-right: 15%;">
+                        <div ng-show="inscription_hotesse">
+                            
+                        <div style="text-align: center;">
+                            <h6 style="color: white;font-size: 35px;font-weight: bold;padding-top: 10%;">Inscription</h6>
+                        </div>
+                            <form action="http://localhost:8000/save" method="post" enctype="multipart/form-data">
+                                <div class="row" style="padding-bottom: 20%;margin-top: 10%;">
                                 <div class="col-6" style="border-right: 1px solid white;">
                                     <div>
                                         <div style="margin-bottom: 20px;">
@@ -162,7 +165,7 @@
                                         
                                     </div>
                                 </div>
-    
+
                                 <div class="col-6">
                                     <div>
                                         <div style="margin-bottom: 20px;">
@@ -181,19 +184,52 @@
                                             <textarea class="form-control champinscri" name="apropos" style="color: white;" placeholder="A propos de vous..." rows="3"></textarea>
                                         </div>
                                         <input type="submit" value="Save">
-                                       
+                                        
                                     </div>
                                 </div>
-                            </div>
-                            
+                                </div>
+                            </form>
                         </div>
-                        
-                        
-                        
-                      </form>
-                   
-                    
-                    
+                        <div>
+                                <div class="row" style="padding-bottom: 20%;margin-top: 10%;">
+                                    <div class="col-6 popup2" style="border-right: 1px solid white;">
+                                        <h3 class="titreInscri2"> Inscription</h3>
+                                       <hr class="ligne2">
+                                       <div class="divLorem">
+                                        <span class="textLorem">
+                                            L’inscription à notre site n’est pas obligatoire. Par contre, si vous voulez bénéficier de tous les services qu’on offre ce site, il est plus que recommandé de vous inscrire. 
+                                           </span>
+                                       </div>
+                                       
+                                    </div>
+
+                                <div class="col-6" style="margin-top: 10%;">
+                                    <form>
+                                    <div style="margin-bottom: 20px;">
+                                        <p style="color: white;font-size: 16px;"> Nom ou pseudo</p>
+                                        <input type="text" class="form-control champinscri" ng-model="f_inscrire_user.nom_user" style="color: white;"  placeholder="Votre nom d'utilisateur...">
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <p style="color: white;font-size: 16px;"> Votre mot de passe</p>
+                                        <input type="password" class="form-control champinscri" ng-model="f_inscrire_user.pass" style="color: white;"  placeholder="Votre mot de passe...">
+                                    </div>
+                                    <div style="margin-bottom: 20px;">
+                                        <p style="color: white;font-size: 16px;"> Confirmer votre mot de passe</p>
+                                        <input type="password" class="form-control champinscri" ng-model="f_inscrire_user.passverif" style="color: white;"  placeholder="Confirmation mot de passe...">
+                                        <p style="color: red;font-size: 16px;" ng-show="passverif"> Veuillez reconfirmer votre mot de passe</p>
+                                        <p style="color: red;font-size: 16px;" ng-show="champverifi"> Veuillez remplir tous les champs</p>
+                                    </div>
+                                    <div><img src="assets/img/Inscription.png" alt="" style="float: right;" ng-click="inscrire()">
+                                    </div>
+                                </form>
+                                    
+                                </div>
+                                   
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                           
                 </div>
             </div>
 

@@ -96,14 +96,7 @@ app.use('/',express.static(__dirname+'/'));
 app.post("/save", upload.single("myImg"),(req,res,next)=>{
 	if(req.file){
 		const pathname = req.file.path;
-		console.log(req.body.nom);
-		console.log(req.body.age);
-		console.log(req.body.sexe);
-		console.log(req.body.categorie);
-		console.log(req.body.email);
-		console.log(req.body.pass);
-		console.log(req.body.apropos);
-		var sql = "INSERT INTO user(nom_user,age,password,email,categorie,sexe,apropos,photo) VALUES('"+req.body.nom +"','"+req.body.age+"','"+req.body.pass+"','"+req.body.email+"','"+req.body.categorie+"','"+req.body.sexe +"','"+req.body.apropos+"','"+pathname+"')";
+		var sql = "INSERT INTO user(nom_user,age,password,email,categorie,sexe,apropos,photo,type) VALUES('"+req.body.nom +"','"+req.body.age+"','"+req.body.pass+"','"+req.body.email+"','"+req.body.categorie+"','"+req.body.sexe +"','"+req.body.apropos+"','"+pathname+"',1)";
 		connection.query(sql,function(err,resultat){
 			if (err) {
 				console.log(err);
@@ -128,12 +121,30 @@ app.post("/save", upload.single("myImg"),(req,res,next)=>{
 	}
 });
 
+app.post("/saveclient",(req,res,next)=>{
+	var sql = "INSERT INTO user(nom_user,password,type,photo) VALUES('"+req.body.nom_user +"','"+req.body.pass+"',2,'public/images/membre.png')";
+	connection.query(sql,function(err,resultat){
+		if (err) {
+			console.log(err);
+			res.send('err');
+		}
+		else{
+			console.log("succées!");
+			var fect="SELECT * FROM user WHERE nom_user = '"+req.body.nom_user+"';";
+			connection.query(fect, (err,result)=>{
+				req.session.userid=result[0]["id_user"];
+				res.redirect("/membres");
+			});
+		}
+	});
+});
+
 
 //         ******************* ACCUEIL ************************
 
 app.get('/membres', function(req, res){
 	sess = req.session;
-	if(sess.userid && sess.categorie && sess.sexe){
+	if(sess.userid){
 		res.sendfile(__dirname+'/categorie.html');
 		io.on('connection', (socket) =>{
 			console.log('a user connected');
@@ -228,8 +239,8 @@ app.post('/login', urlencodedParser, function(req, res){
 // LISTE USER
 app.get('/listeuser',function(req,res){
 	sess=req.session;
-	if(sess.userid && sess.categorie && sess.sexe){
-		var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND categorie='"+sess.categorie+"';";
+	if(sess.userid){
+		var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND type=1;";
 	connection.query(sql,function(err,resultat){
 		if (err) {
 			res.send('err');
@@ -285,7 +296,7 @@ app.get('/profil/:para', function(req,res){
 
 app.get('/detail', function(req,res){
 	sess=req.session;
-	if(sess.userid && sess.categorie && sess.sexe && sess.toid){
+	if(sess.userid && sess.toid){
 		res.sendfile(__dirname+"/backoffice/profil.html");
 	}
 	else{
@@ -295,7 +306,7 @@ app.get('/detail', function(req,res){
 
 app.get('/detailprofil', function(req,res){
 	sess=req.session;
-	if(sess.userid && sess.categorie && sess.sexe && sess.toid){
+	if(sess.userid && sess.toid){
 		var sql="SELECT * FROM user WHERE id_user LIKE '%"+sess.toid+"';";
 		connection.query(sql,function(err,resultat){
 			if (err) {
@@ -314,7 +325,7 @@ app.get('/detailprofil', function(req,res){
 
 app.get('/detailprofilencore', function(req,res){
 	sess=req.session;
-	if(sess.userid && sess.categorie && sess.sexe && sess.toid&& sess.categorietoid){
+	if(sess.userid && sess.toid&& sess.categorietoid){
 		var sql="SELECT * FROM user WHERE id_user!='"+sess.toid+"' AND categorie='"+sess.categorietoid+"';";
 		connection.query(sql,function(err,resultat){
 			if (err) {
