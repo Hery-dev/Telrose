@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELROSE</title>
+    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../Styles.css">
+    <script src="../angular.min.js"></script>
+    <script src="../controller.js"></script>
+    </head>
+<body style="background-color: #e996a0;" ng-app="monApp" ng-controller="usercontroller">
+    <div class="container-fluid-p-0">
+        <div class="categorie">
+            <div class="row menuheader">
+                <div class="col-2 logo">
+                    <img src="../assets/img/logo.png" alt="" class="logo">
+                </div>
+                <div class="col-8"></div>
+                <div class="col-2 btnconnect" >
+                    <img src="../assets/img/icone-panier.png" alt="" class="profil">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal">
+                    <img src="../assets/img/icone-profil.png" alt="" class="profil">
+                    </a>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    
+    <div class="container" style="margin-top: 20px;" ng-repeat="us in user">
+        <div class="row">
+            <div class="col-4" style="background-color:#f26d7d;border-radius: 30px;height: 700px;" >
+                <div class="row" style="margin-left: 5%;margin-right: 5%;">
+                    <div class="col-6">
+                        <p style="margin-top :15% ;color: white;"><img src="../assets/img/Pannier.png" alt="">Achat credit</p>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <img src="../assets/img/NombreCredit.png" alt="" style="margin-top: 12%;">
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 10%;margin-right: 5%;margin-top: 20px;">
+                    <div class="col-10" style="margin: 0px;padding: 0px;max-width: 72%;">
+                        <input type="text" placeholder="Recherche..."  class="form-control" style="margin-top: 5px;background-color: #e899a2;border-radius: 30px;">
+                    </div>
+                    <div class="col-2">
+                        <img src="../assets/img/recherche.png" alt="" >
+                    </div>
+                </div>
+                <div class="messageliste" style="max-height: 500px;overflow: auto;overflow-x: hidden;margin-top: 20px;margin-bottom: 50px;"> 
+                    <ul style="list-style: none;margin: 30px 0px 0px 0px;padding: 0px;">
+                        <li ng-repeat="list in listuser">
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-2">
+                                    <img src="../{{list.photo}}" ng-click="messageprive(list.id_user)" alt="" style="height: 60px;width: 60px;border-radius: 30px;">
+                                    
+                                </div>
+                                
+                                <div class="col-8" style="color: white;">
+                                    <div>
+                                        <p style="margin-bottom: 0px;font-size: 13px; margin-left: 10px;">{{list.nom_user}}</p>
+                                        <p style="margin-bottom: 0px;font-size: 13px; margin-left: 10px;">{{list.apropos}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-2" style="margin: 0px;padding: 0px; font-size: x-small;color: white;">
+                                    <p>10:30</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="col-6" style="background-color: #dadada;border-radius: 30px;" ng-repeat="list in detailuser">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-6" style="text-align: center;">
+                        <p>{{list.nom_user}}</p>
+                    </div>
+                    <div class="col-6" style="text-align: center;">
+                    <img src="../assets/img/calling.png" alt="">
+                    </div>
+                </div>
+                <hr style="border-bottom: 1px solid white;">
+                <div style="margin-top: 20px;" ng-repeat="listmessage in message">
+                    <div ng-if="listmessage.id_touser==us.id_user" style="text-align: right;">
+                        <div class="row" style="margin-left: 30%;margin-right: 5%;">
+                            <div class="col-10">
+                                <p style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #0991c4;max-width: 100%;">{{ listmessage.mes }}</p>
+                            </div>
+                            <div class="col-2" style="padding: 0px;">
+                                <img ng-src="../{{us.photo}}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="listmessage.id_user==us.id_user">
+                        <div class="row" style="margin-right: 30%;margin-left: 5%;">
+                            <div class="col-2">
+                                <img ng-src="../{{listmessage.photo_touser}}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                            </div>
+                            <div class="col-10" style="padding: 0px;">
+                                <p style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #f26d7d;max-width: 100%;margin-left: 10%;">{{ listmessage.mes }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="col-2" style="background-color: #9f6970; border-radius: 30px;" ng-repeat="list in detailuser">
+                <div style="height: 100px;width: 100px;margin-left: 17%;margin-top: 40%">
+                    <img ng-src="../{{list.photo}}" alt="" style="border-radius: 50px;height: 100%;width: 100%;">
+                    <p>{{list.nom_user}}</p>
+                    <p style="font-size: x-small;"><img src="../assets/img/telephone.png" alt="">+33 122 5651 20</p>
+                    <img src="../assets/img/Details.png" alt="">
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>

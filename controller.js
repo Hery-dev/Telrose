@@ -37,7 +37,6 @@ app.controller("usercontroller",function($scope,$http){
                             window.location = respgUrl;
                         }
                         else{
-                            alert("NNNNNNNN");
                             $scope.error_text=true;
                         }
                     }
@@ -140,6 +139,27 @@ app.controller("usercontroller",function($scope,$http){
 		}
 		
 	}
+
+    $scope.messageprive=(toid)=>{
+        $http.get('/getUsermessage/'+toid)
+        .then(function(data){
+            if(data.data=="ok"){
+                var respgUrl = "http://" + window.location.host + "/message";
+                window.location = respgUrl;
+            }
+        });
+    }
+    
+   
+    $scope.messagetous=function(){
+        $http.get('/derniermessage')
+        .then(function(data){
+            $scope.message=data.data;
+        });
+    }
+
+    $scope.messagetous();
+
     $scope.passverif=false;
     $scope.inscrire=function(){
         if($scope.f_inscrire_user.pass!=null && $scope.f_inscrire_user.nom_user!=null && $scope.f_inscrire_user.passverif!=null){
@@ -166,7 +186,7 @@ app.controller("usercontroller",function($scope,$http){
             return
         }
         else{
-            alert("user nom : "+data["nom_user"]);
+            //alert("user nom : "+data["nom_user"]);
         }
 
     });
@@ -231,13 +251,13 @@ app.controller("usercontroller",function($scope,$http){
     }
 
     $scope.voirprofil=(nom)=>{
-        alert(nom);
+        //alert(nom);
     }
 
     $scope.register=function(){
        $http.post('/upload', "ok")
        .then(function(data){
-           alert(data);
+           //alert(data);
        });
     }
 });

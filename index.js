@@ -154,13 +154,13 @@ app.get('/membres', function(req, res){
 			});
 		
 			socket.on("new user", function (data) {
-				console.log(data);
+				//console.log(data);
 				io.emit("new user", data);
 			});
 		
 			socket.on("new message", function (data) {
-				console.log(data);
-				console.log(sess.userid);
+				//console.log(data);
+				//console.log(sess.userid);
 				
 				io.emit("new message", data);
 			});
@@ -203,7 +203,7 @@ app.post('/register', urlencodedParser, function(req, res){
             console.log("succées!");
 			var fect="SELECT * FROM user WHERE nom_user = '"+req.body.nom_user+"';";
 			connection.query(fect, (err,result)=>{
-				console.log(result[0]["id_user"]);
+				//console.log(result[0]["id_user"]);
 				req.session.userid=result[0]["id_user"];
 				res.send(result);
 			});
@@ -253,7 +253,7 @@ app.get('/listeuser',function(req,res){
 });
 
 app.get('/listerec/:para', function(req,res){
-	console.log(req.params.para);
+	//console.log(req.params.para);
 	var sql="SELECT * FROM user WHERE sexe LIKE '%"+req.params.para+"%' OR categorie LIKE '%"+req.params.para+"%'";
 	connection.query(sql,function(err,resultat){
 		if (err) {
@@ -279,19 +279,54 @@ app.get('/recherche/:para',function(req,res){
 });
 
 app.get('/profil/:para', function(req,res){
-	console.log(req.params.para);
+	//console.log(req.params.para);
 	var sql="SELECT * FROM user WHERE id_user LIKE '%"+req.params.para+"';";
 	connection.query(sql,function(err,resultat){
 		if (err) {
 			res.send('err');
 		}
 		else{
+			console.log("Hiditra profil : ",resultat["0"]["id_user"]);
 			req.session.toid=resultat["0"]["id_user"];
 			req.session.categorietoid=resultat["0"]["categorie"];
 			res.json(resultat);
 		}
 	});
 	//res.sendfile(__dirname+"/backoffice/profil.html");
+});
+
+app.get('/getUsermessage/:para', function(req,res){
+	console.log("Handefa message amin : ",req.params.para);
+	req.session.toid=req.params.para;
+	var sess=req.session.toid;
+	console.log("Mpandray hita : ",sess);
+	res.send("ok");
+});
+
+app.get('/derniermessage', function(req,res){
+	sess=req.session;
+	if(sess.userid && sess.toid){
+		var sql="SELECT * FROM message WHERE id_user="+sess.userid+" AND id_touser="+sess.toid+" OR id_user="+sess.toid+" AND id_touser="+sess.userid+";";
+		connection.query(sql,function(err,resultat){
+			if (err) {
+				res.send('err');
+			}
+			else{
+				console.log(resultat);
+				res.json(resultat);
+			}
+		});
+	}
+});
+
+app.get('/message', function(req,res){
+	sess=req.session;
+	if(sess.toid && sess.userid){
+		res.sendFile(__dirname+"/backoffice/message.html");
+	}
+	else{
+		res.redirect("/");
+	}
 });
 
 app.get('/detail', function(req,res){
@@ -313,7 +348,7 @@ app.get('/detailprofil', function(req,res){
 				res.send('err');
 			}
 			else{
-				console.log(resultat);
+				console.log("Profile : ",resultat["0"]["id_user"]);
 				res.json(resultat);
 			}
 		});
@@ -332,7 +367,7 @@ app.get('/detailprofilencore', function(req,res){
 				res.send('err');
 			}
 			else{
-				console.log(resultat);
+				//console.log(resultat);
 				res.json(resultat);
 			}
 		});

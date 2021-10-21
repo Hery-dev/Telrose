@@ -233,3 +233,13 @@ body{
     color: white;
     margin-top: 10px;
 }
+
+.messageliste{
+    max-height: 500px;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+
