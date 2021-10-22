@@ -117,7 +117,10 @@ app.post("/save", upload.single("myImg"),(req,res,next)=>{
 		});
 	}
 	else{
-		res.sendFile(__dirname+"/inscription.html");
+		setTimeout(() => {
+			res.sendFile(__dirname+"/inscription.html");
+		}, 3000);
+		
 	}
 });
 
@@ -145,30 +148,34 @@ app.post("/saveclient",(req,res,next)=>{
 app.get('/membres', function(req, res){
 	sess = req.session;
 	if(sess.userid){
-		res.sendfile(__dirname+'/categorie.html');
-		io.on('connection', (socket) =>{
-			console.log('a user connected');
-		
-			socket.on('disconnect', () => {
-				console.log('user disconnected');
+		setTimeout(() => {
+			res.sendfile(__dirname+'/categorie.html');
+			io.on('connection', (socket) =>{
+				console.log('a user connected');
+			
+				socket.on('disconnect', () => {
+					console.log('user disconnected');
+				});
+			
+				socket.on("new user", function (data) {
+					//console.log(data);
+					io.emit("new user", data);
+				});
+			
+				socket.on("new message", function (data) {
+					//console.log(data);
+					//console.log(sess.userid);
+					
+					io.emit("new message", data);
+				});
 			});
-		
-			socket.on("new user", function (data) {
-				//console.log(data);
-				io.emit("new user", data);
-			});
-		
-			socket.on("new message", function (data) {
-				//console.log(data);
-				//console.log(sess.userid);
-				
-				io.emit("new message", data);
-			});
-		});
-		
+		}, 3000);
 	}
     else{
-		res.sendfile(__dirname+'/');
+		setTimeout(() => {
+			res.sendfile(__dirname+'/');
+		}, 3000);
+		
 	}
 });
 
@@ -225,6 +232,7 @@ app.post('/login', urlencodedParser, function(req, res){
 				req.session.userid=resultat[0]["id_user"];
 				req.session.categorie=resultat[0]["categorie"];
 				req.session.sexe=resultat[0]["sexe"];
+				req.session.type=resultat[0]["type"];
 				res.send(resultat);
 			}
 			else{
@@ -239,16 +247,58 @@ app.post('/login', urlencodedParser, function(req, res){
 // LISTE USER
 app.get('/listeuser',function(req,res){
 	sess=req.session;
-	if(sess.userid){
-		var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND type=1;";
-	connection.query(sql,function(err,resultat){
-		if (err) {
-			res.send('err');
+	if(sess.userid && sess.type){
+		if(sess.type==1){
+			var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND type=2;";
+			connection.query(sql,function(err,resultat){
+				if (err) {
+					res.send('err');
+				}
+				else{
+					res.json(resultat);
+				}
+			});
 		}
 		else{
-			res.json(resultat);
+			var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND type=1;";
+			connection.query(sql,function(err,resultat){
+				if (err) {
+					res.send('err');
+				}
+				else{
+					res.json(resultat);
+				}
+			});
 		}
-	});
+	}
+});
+
+// LIST USER MESSAGE
+app.get('/listeusermessage',function(req,res){
+	sess=req.session;
+	if(sess.userid && sess.type){
+		if(sess.type==1){
+			var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND type=2;";
+			connection.query(sql,function(err,resultat){
+				if (err) {
+					res.send('err');
+				}
+				else{
+					res.json(resultat);
+				}
+			});
+		}
+		else{
+			var sql="SELECT * FROM user WHERE id_user!='"+sess.userid+"' AND type=1;";
+			connection.query(sql,function(err,resultat){
+				if (err) {
+					res.send('err');
+				}
+				else{
+					res.json(resultat);
+				}
+			});
+		}
 	}
 });
 
@@ -312,7 +362,7 @@ app.get('/derniermessage', function(req,res){
 				res.send('err');
 			}
 			else{
-				console.log(resultat);
+				//console.log(resultat);
 				res.json(resultat);
 			}
 		});
@@ -323,6 +373,32 @@ app.get('/message', function(req,res){
 	sess=req.session;
 	if(sess.toid && sess.userid){
 		res.sendFile(__dirname+"/backoffice/message.html");
+		io.on('connection', (socket) =>{
+			console.log('a user connected');
+		
+			socket.on('disconnect', () => {
+				console.log('user disconnected');
+			});
+		
+			socket.on("new user", function (data) {
+				//console.log(data);
+				io.emit("new user", data);
+			});
+		
+			socket.on("new message", function (data) {
+				//console.log(data);
+				//console.log(sess.userid);
+				
+				io.emit("new message", data);
+			});
+
+			socket.on("message", function (data) {
+				console.log(data);
+				//console.log(sess.userid);
+				
+				io.emit("message", data);
+			});
+		});
 	}
 	else{
 		res.redirect("/");
@@ -348,7 +424,7 @@ app.get('/detailprofil', function(req,res){
 				res.send('err');
 			}
 			else{
-				console.log("Profile : ",resultat["0"]["id_user"]);
+				//console.log("Profile : ",resultat["0"]["id_user"]);
 				res.json(resultat);
 			}
 		});

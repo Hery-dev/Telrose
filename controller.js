@@ -1,6 +1,6 @@
 var app=angular.module("monApp",[]);
 
-app.controller("usercontroller",function($scope,$http){
+app.controller("usercontroller",function($scope,$http, $timeout){
 
 
     const socket = io();
@@ -10,6 +10,10 @@ app.controller("usercontroller",function($scope,$http){
     $scope.hotessNonVlide = false;
     $scope.messageshow = false;
     $scope.champNonvalid=false;
+     
+    $scope.chargement=true;
+    $scope.chargementOk=false;
+   
 
     $scope.login=function(){
         if($scope.f_login_user){
@@ -51,7 +55,7 @@ app.controller("usercontroller",function($scope,$http){
         
     }
 
-    $scope.getUser = function(){
+    $scope.getUserTo = function(){
         $http.get('/getUser')
 		.then(function(data){
 			if (data.data=="NON") {
@@ -60,11 +64,14 @@ app.controller("usercontroller",function($scope,$http){
 			else{
 				//alert(data.data[0]["id_user"]);
                 $scope.user = data.data;
+                $scope.user_to_id=data.data[0]["id_user"];
+                $scope.user_to_nom=data.data[0]["nom_user"];
+                $scope.user_to_photo=data.data[0]["photo"];
 			}
 		})
     }
 
-    $scope.getUser();
+    $scope.getUserTo();
 
     $scope.lister = function(){
         $http.get('/listeuser')
@@ -79,6 +86,20 @@ app.controller("usercontroller",function($scope,$http){
     }
 
     $scope.lister();
+
+    $scope.listermes = function(){
+        $http.get('/listeusermessage')
+		.then(function(data){
+			if (data!='err') {
+				$scope.listusermes=data.data;
+			}
+			else{
+				alert("Erreur d'affichage!");
+			}
+		})
+    }
+
+    $scope.listermes();
 
     $scope.listerec=(rec)=>{
         $http.get('/listerec/'+rec)
@@ -95,7 +116,7 @@ app.controller("usercontroller",function($scope,$http){
 		});
     }
 
-    $scope.detail=function(){
+    $scope.detailSession=function(){
         $http.get('/detailprofil')
 		.then(function(data){
             if(data.data=="NON"){
@@ -103,11 +124,17 @@ app.controller("usercontroller",function($scope,$http){
             }
             else{
                 $scope.detailuser=data.data;
+                $scope.id_user_to=data.data[0]["id_user"];
+                $scope.nom=data.data[0]["nom_user"];
+                $scope.age=data.data[0]["age"];
+                $scope.categorie=data.data[0]["categorie"];
+                $scope.photo=data.data[0]["photo"];
+                $scope.apropos=data.data[0]["apropos"];
             }
 			
 		});
     }
-    $scope.detail();
+    $scope.detailSession();
 
     $scope.detailencore=function(){
         $http.get('/detailprofilencore')
@@ -149,16 +176,61 @@ app.controller("usercontroller",function($scope,$http){
             }
         });
     }
-    
    
     $scope.messagetous=function(){
         $http.get('/derniermessage')
         .then(function(data){
+            $scope.messageContent=true;
             $scope.message=data.data;
+            $timeout(function(){
+                $scope.chargement=false;
+                $scope.chargementOk=true;
+            },2680);
         });
     }
 
     $scope.messagetous();
+
+    $scope.envoiemessage=function(){
+        socket.emit("message", {
+           id_user:$scope.user_to_id,
+            id_touser:$scope.id_user_to,
+             nom_touser:$scope.nom,
+            photo_touser:$scope.photo,
+            mes:$scope.f_messageto.mes
+        });
+        const mesBox = angular.element(document.getElementById("mesBox"));
+        const mesCont = angular.element(`<div class="row" style="margin-left: 30%;margin-right: 5%;">
+                                            <div class="col-10">
+                                                <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #0991c4;max-width: 100%;">${$scope.f_messageto.mes}</p> </div>
+                                            <div class="col-2" style="padding: 0px;">
+                                                <img src="../${$scope.user_to_photo}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                                            </div>
+                                        </div>
+                                        `);
+        mesBox.append(mesCont);
+    };
+
+    socket.on("message", function (data) {
+        if($scope.user_to_id==data["id_touser"]){
+            const mesBox = document.getElementById("mesBox");
+            const mesCont = `<div class="row" style="margin-right: 30%;margin-left: 5%;">
+                                            <div class="col-2">
+                                                <img ng-src="../${data["photo_touser"]}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                                            </div>
+                                            <div class="col-10" style="padding: 0px;">
+                                                <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #f26d7d;max-width: 100%;margin-left: 10%;">${data["mes"]}</p>
+                                            </div>
+                                        </div>
+                                        `;
+            mesBox.innerHTML=mesCont;
+        //$compile(mesBox)($scope);
+        }
+        else{
+            //alert("misy message");
+        }
+
+    });
 
     $scope.passverif=false;
     $scope.inscrire=function(){
@@ -190,8 +262,6 @@ app.controller("usercontroller",function($scope,$http){
         }
 
     });
-
-    
     $scope.actionner=(toid)=>{
         $scope.messageshow = true;
         $scope.toid=toid;

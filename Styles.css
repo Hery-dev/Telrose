@@ -162,10 +162,10 @@ body{
     left: 20px;
 }
 .detailprofilcat{
-    background-color: black; opacity: 50%;
+    background-image: url('assets/img/bgnoir.png');
     color: white;
     position: absolute;
-    top: 54%;
+    bottom: 0%;
     width: 100%;
 }
 .Autreprofil{
