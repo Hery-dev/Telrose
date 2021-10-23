@@ -93,30 +93,29 @@
                     <div ng-show="chargement" style="text-align: center;height: 400px;">
                         <img src="../assets/img/load.gif" alt="" style="height: 50%;margin-top: 20%;">
                     </div>
-                    <div ng-show="chargementOk" style="height:400px; overflow: auto;overflow-y:auto;">
-                        <div style="margin-top: 20px;"  ng-repeat="listmessage in message" >
-                            <div ng-if="listmessage.id_touser==user_to_id" style="text-align: right;">
-                                <div class="row" style="margin-left: 30%;margin-right: 5%;">
-                                    <div class="col-10">
-                                        <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #0991c4;max-width: 100%;">{{ listmessage.mes }}</p> </div>
-                                    <div class="col-2" style="padding: 0px;">
-                                        <img ng-src="../{{user_to_photo}}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                    <div ng-show="chargementOk" style="height:400px; overflow: auto;overflow-y:auto;" id="mesBox">
+                        <div  style="text-align: right;">
+                            <div style="margin-top: 20px;"  ng-repeat="listmessage in message"  >
+                                <div ng-if="listmessage.id_user==user_to_id" style="text-align: right;">
+                                    <div class="row" style="margin-left: 30%;margin-right: 5%;">
+                                        <div class="col-10">
+                                            <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #0991c4;max-width: 100%;">{{ listmessage.mes }}</p> </div>
+                                        <div class="col-2" style="padding: 0px;">
+                                            <img ng-src="../{{user_to_photo}}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="listmessage.id_touser==user_to_id">
+                                    <div class="row" style="margin-right: 30%;margin-left: 5%;">
+                                        <div class="col-2">
+                                            <img ng-src="../{{listmessage.photo_touser}}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                                        </div>
+                                        <div class="col-10" style="padding: 0px;">
+                                            <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #f26d7d;max-width: 100%;margin-left: 10%;">{{ listmessage.mes }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div ng-if="listmessage.id_user==user_to_id">
-                                <div class="row" style="margin-right: 30%;margin-left: 5%;">
-                                    <div class="col-2">
-                                        <img ng-src="../{{listmessage.photo_touser}}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
-                                    </div>
-                                    <div class="col-10" style="padding: 0px;">
-                                        <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #f26d7d;max-width: 100%;margin-left: 10%;">{{ listmessage.mes }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="mesBox" style="text-align: right;">
-                            
                         </div>
                     </div>
                     <form>
@@ -130,6 +129,10 @@
                             </div>
                         </div>
                     </form>
+
+                    <div>
+                        <img ng-src="../{{sary}}" alt="" style="height: 60px;width: 60px;border-radius: 30px;">
+                    </div>
                     
               
                 

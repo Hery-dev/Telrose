@@ -13,6 +13,7 @@ app.controller("usercontroller",function($scope,$http, $timeout){
      
     $scope.chargement=true;
     $scope.chargementOk=false;
+    $scope.messagetonga=false;
    
 
     $scope.login=function(){
@@ -177,53 +178,85 @@ app.controller("usercontroller",function($scope,$http, $timeout){
         });
     }
    
-    $scope.messagetous=function(){
-        $http.get('/derniermessage')
-        .then(function(data){
-            $scope.messageContent=true;
-            $scope.message=data.data;
-            $timeout(function(){
-                $scope.chargement=false;
-                $scope.chargementOk=true;
-            },2680);
-        });
+    $scope.messagetous=(status)=>{
+        if(status=="charge"){
+            $http.get('/derniermessage')
+                .then(function(data){
+                $scope.messageContent=true;
+                $scope.message=data.data;
+                $timeout(function(){
+                    $scope.chargement=false;
+                    $scope.chargementOk=true;
+                },2680);
+            });
+        }
+        else{
+            $http.get('/derniermessage')
+                .then(function(data){
+                $scope.messageContent=true;
+                $scope.message=data.data;
+            });
+        }
+        
     }
 
-    $scope.messagetous();
+    $scope.messagetous("charge");
 
     $scope.envoiemessage=function(){
-        socket.emit("message", {
-           id_user:$scope.user_to_id,
+        $http.post('/sendmes', {
+            id_user:$scope.user_to_id,
             id_touser:$scope.id_user_to,
-             nom_touser:$scope.nom,
-            photo_touser:$scope.photo,
+            nom_touser:$scope.user_to_nom,
+            photo_touser:$scope.user_to_photo,
             mes:$scope.f_messageto.mes
+        }).then(function(data){
+            if(data.data=="non"){
+
+            }
+            else{
+                /*const mesBox = document.getElementById("mesBox");
+                const mesCont = `<div class="row" style="margin-left: 30%;margin-right: 5%;">
+                                                    <div class="col-10">
+                                                        <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #0991c4;max-width: 100%;">${$scope.f_messageto.mes}</p> </div>
+                                                    <div class="col-2" style="padding: 0px;">
+                                                        <img src="../${$scope.user_to_photo}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                                                    </div>
+                                                </div>
+                                                `;
+                mesBox.innerHTML=mesCont;*/
+                $scope.messagetous("send");
+                const mesBox = document.getElementById("mesBox");
+                mesBox.scrollTop=mesBox.scrollHeight;
+                socket.emit("message", {
+                    id_user:$scope.user_to_id,
+                    id_touser:$scope.id_user_to,
+                    nom_touser:$scope.user_to_nom,
+                    photo_touser:$scope.user_to_photo,
+                    mes:$scope.f_messageto.mes
+                });
+                $scope.f_messageto.mes="";
+            }
         });
-        const mesBox = angular.element(document.getElementById("mesBox"));
-        const mesCont = angular.element(`<div class="row" style="margin-left: 30%;margin-right: 5%;">
-                                            <div class="col-10">
-                                                <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #0991c4;max-width: 100%;">${$scope.f_messageto.mes}</p> </div>
-                                            <div class="col-2" style="padding: 0px;">
-                                                <img src="../${$scope.user_to_photo}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
-                                            </div>
-                                        </div>
-                                        `);
-        mesBox.append(mesCont);
+        
+        
     };
 
     socket.on("message", function (data) {
         if($scope.user_to_id==data["id_touser"]){
-            const mesBox = document.getElementById("mesBox");
+            $scope.messagetous("send");
+            $scope.sary = data["photo_touser"];
+            $scope.messagetonga=true;
+            /*const mesBox = document.getElementById("mesBox");
             const mesCont = `<div class="row" style="margin-right: 30%;margin-left: 5%;">
                                             <div class="col-2">
-                                                <img ng-src="../${data["photo_touser"]}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
+                                                <img src="../${data["photo_touser"]}" alt="" style="width: 60px;height: 60px;border-radius: 30px;">
                                             </div>
                                             <div class="col-10" style="padding: 0px;">
                                                 <p ng-show="chargementOk" style="margin-bottom: 0px;margin-top: 10px;border-radius: 30px;padding: 10px 20px 10px 10px;background-color: #f26d7d;max-width: 100%;margin-left: 10%;">${data["mes"]}</p>
                                             </div>
                                         </div>
                                         `;
-            mesBox.innerHTML=mesCont;
+            mesBox.lastElementChild.innerHTML=mesCont;*/
         //$compile(mesBox)($scope);
         }
         else{

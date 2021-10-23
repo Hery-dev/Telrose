@@ -17,6 +17,7 @@ const server = http.createServer(app);
 
 const { Server } = require("socket.io");
 const { dirname } = require('path');
+const { Console } = require('console');
 
 const io = new Server(server);
 
@@ -372,7 +373,8 @@ app.get('/derniermessage', function(req,res){
 app.get('/message', function(req,res){
 	sess=req.session;
 	if(sess.toid && sess.userid){
-		res.sendFile(__dirname+"/backoffice/message.html");
+		//var sql ="INSERT INTO message (id_user, id_touser, nom_touser, photo_touser, mes, date) VALUES ('"+df+"', '20', 'Betty', 'public/images/BettyBetty.png', 'Bonjour betty', '23/10/2021');"
+
 		io.on('connection', (socket) =>{
 			console.log('a user connected');
 		
@@ -399,10 +401,27 @@ app.get('/message', function(req,res){
 				io.emit("message", data);
 			});
 		});
+		res.sendFile(__dirname+"/backoffice/message.html");
 	}
 	else{
 		res.redirect("/");
 	}
+});
+
+app.post('/sendmes', function(req, res){
+	//console.log(req.body.mes);
+	var sql ="INSERT INTO message (id_user, id_touser, nom_touser, photo_touser, mes, date) VALUES ('"+req.body.id_user+"', '"+req.body.id_touser+"', '"+req.body.nom_touser+"', '"+req.body.photo_touser+"', '"+req.body.mes+"', '23/10/2021');"
+	connection.query(sql,function(err,resultat){
+		if (err) {
+			console.log(err);
+			res.send("non");
+		}
+		else{
+			console.log(resultat);
+			res.json(resultat);
+		}
+	});
+	
 });
 
 app.get('/detail', function(req,res){
