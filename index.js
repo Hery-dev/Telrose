@@ -118,10 +118,7 @@ app.post("/save", upload.single("myImg"),(req,res,next)=>{
 		});
 	}
 	else{
-		setTimeout(() => {
-			res.sendFile(__dirname+"/inscription.html");
-		}, 3000);
-		
+		res.sendFile(__dirname+"/inscription.html");
 	}
 });
 
@@ -174,7 +171,7 @@ app.get('/membres', function(req, res){
 	}
     else{
 		setTimeout(() => {
-			res.sendfile(__dirname+'/');
+			res.redirect("/");
 		}, 3000);
 		
 	}
@@ -469,6 +466,16 @@ app.get('/detailprofilencore', function(req,res){
 	}
 	else{
 		res.send("NON");
+	}
+});
+
+app.get('/credit', function(req,res){
+	sess=req.session;
+	if(sess.userid){
+		res.sendFile(__dirname+"/backoffice/Credit.html")
+	}
+	else{
+		res.redirect("/");
 	}
 });
 

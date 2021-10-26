@@ -19,13 +19,17 @@
         <div class="categorie">
             <div class="row menuheader">
                 <div class="col-2 logo">
-                    <img src="../assets/img/logo.png" alt="" class="logo">
+                    <a href="/">
+                        <img src="assets/img/logo.png" alt="" class="logo">
+                    </a>
                 </div>
                 <div class="col-8"></div>
                 <div class="col-2 btnconnect" >
-                    <img src="../assets/img/icone-panier.png" alt="" class="profil">
-                    <a href="#" data-toggle="modal" data-target="#exampleModal">
-                    <img src="../assets/img/icone-profil.png" alt="" class="profil">
+                    <a href="/credit">
+                        <img src="assets/img/icone-panier.png" alt="" class="profil" style="margin-right: 20px;">
+                    </a>
+                    <a href="/membres" >
+                        <img src="../{{user_to_photo}}" alt="" class="profil">
                     </a>
                 </div>
             </div>
@@ -122,7 +126,7 @@
                         <div class="row" style="padding: 0px;margin: 20px 50px 0px 50px;">
                             <input type="text" ng-model="id_user_to" hidden>
                             <div class="col-10">
-                                <textarea ng-model="f_messageto.mes" placeholder="Ecreire votre message..."  class="form-control" style="border-radius: 20px;"></textarea>
+                                <textarea ng-model="f_messageto.mes" placeholder="Ecrire votre message..."  class="form-control" style="border-radius: 20px;"></textarea>
                             </div>
                             <div class="col-2">
                                 <img src="../assets/img/envoyez.png" ng-click="envoiemessage()" style="height: 70%;margin-top: 15%;" alt="">
@@ -143,7 +147,7 @@
                     <img ng-src="../{{photo}}" alt="" style="border-radius: 50px;height: 100%;width: 100%;">
                     <p>{{nom}}</p>
                     <p style="font-size: x-small;"><img src="../assets/img/telephone.png" alt="">+33 122 5651 20</p>
-                    <img src="../assets/img/Details.png" alt="">
+                    <img src="assets/img/Details.png" alt="">
                 </div>
             
             </div>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELROSE</title>
+    <link rel="stylesheet" href="../assets/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../Styles.css">
+    <script src="../angular.min.js"></script>
+    <script src="../controller.js"></script>
+</head>
+<body ng-app="monApp" ng-controller="usercontroller">
+    <div class="full_page" style="overflow-x: hidden;width: 100%;height: 100%;">
+    <!-- header -->
+    <div class="container-fluid-p-0">
+        <div style="background-image: url('./assets/img/bg-credit.png');background-repeat: no-repeat;background-size: cover;" class="categorie2">
+            <div class="row menuheader">
+                <div class="col-sm-2 logo">
+                    <a href="/">
+                        <img src="assets/img/logo.png" alt="" class="logo">
+                    </a>
+                </div>
+                <div class="col-sm-8"></div>
+                <div class="col-sm-2 btnconnect" >
+                    <a href="/credit">
+                        <img src="assets/img/icone-panier.png" alt="" class="profil" style="margin-right: 20px;">
+                    </a>
+                    <a href="/membres" >
+                        <img src="../{{user_to_photo}}" alt="" class="profil">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4" style="text-align: center;background-color: rgb(223, 29, 94);border-radius: 20px 20px 0px 0px;margin-top: 62px;">
+                            <a href="/membres" style="text-decoration: none;color: white;">
+                                <h6><img src="assets/img/menuCategorie.png" style="margin-right: 10px;" alt="">  Hotêsses</h6>
+                            </a>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </div>
+                <div class="col-4"></div>
+            </div>
+        </div>
+        <div>
+            <div style="text-align: center; margin-top: 7%;" class="row">
+                <div class="col-sm-3">
+                    <img style="position: relative;width: 100%;" src="./assets/img/crd.png" alt="">
+                    <div>
+                        <h5 style="position: absolute; top: 11%;margin-left: 19%;color: white;">PACK AMATEUR</h5>
+                        <h6 style="position: absolute; top: 26%;margin-left: 39%;color: rgb(42, 145, 204);">10 Crédit</h6>
+                        <img style="position: absolute; top: 34%;margin-left: -11%;" src="assets/img/iconeAmateur.png" alt="">
+                        <p style="position: absolute; top: 57%;margin-left: 50px;color: rgb(117, 114, 114);margin-right: 30px;font-size: 11px;">
+                            Pour ceux qui veulent découvrir 
+                            l’univers du téléphone rose.
+                            Un petit budget 
+                            pour de grandes sensations.</p>
+                        <h3 style="position: absolute; top: 72%;margin-left: 37%;color: rgb(25, 163, 182);">7.99 €</h3>
+                        <img style="position: absolute; top: 86%;margin-left: -14%;" src="assets/img/Achetez.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <img style="position: relative;width: 100%;" src="assets/img/credit2.png" alt="">
+                    <div>
+                        <h5 style="position: absolute; top: 11%;margin-left: 19%;color: white;">PACK COQUIN</h5>
+                        <h6 style="position: absolute; top: 26%;margin-left: 39%;color: #e3336c;">20 Crédit</h6>
+                        <img style="position: absolute; top: 34%;margin-left: -11%;" src="assets/img/iconeCouquin.png" alt="">
+                        <p style="position: absolute; top: 57%;margin-left: 50px;color: rgb(117, 114, 114);margin-right: 30px;font-size: 11px;">
+                            Pour les initiés qui souhaitent 
+                            approfondir et sublimer leurs fantasmes. 
+                            20 minutes de bonheur 
+                            à consommer sans modération.</p>
+                        <h3 style="position: absolute; top: 72%;margin-left: 37%;color:#e3336c;">14.99 €</h3>
+                        <img style="position: absolute; top: 86%;margin-left: -14%;" src="assets/img/Achetez.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <img style="position: relative;width: 100%;" src="assets/img/credit3.png" alt="">
+                    <div>
+                        <h5 style="position: absolute; top: 11%;margin-left: 19%;color: white;">PACK COUCHON</h5>
+                        <h4><h6 style="position: absolute; top: 26%;margin-left: 39%;color: #cfc231;">30 Crédit</h6></h4>
+                        <img style="position: absolute; top: 34%;margin-left: -3%;" src="assets/img/packCouchon.png" alt="">
+                        <p style="position: absolute; top: 57%;margin-left: 50px;color: rgb(117, 114, 114);margin-right: 30px;font-size: 11px;">
+                            Pour les adeptes qui cherchent 
+                            une relation suivie ou découvrir 
+                            toutes nos charmantes hôtesses. 
+                            50 minutes de plaisir intense.</p>
+                        <h3 style="position: absolute; top: 72%;margin-left: 37%;color: #cfc231;">34.99 €</h3>
+                        <img style="position: absolute; top: 86%;margin-left: -14%;" src="assets/img/Achetez.png" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <img style="position: relative;width: 100%;" src="assets/img/credit4.png" alt="">
+                    <div>
+                        <h5 style="position: absolute; top: 11%;margin-left: 19%;color: white;">PACK HARDEUR</h5>
+                        <h6 style="position: absolute; top: 26%;margin-left: 39%;color: #a94ede;">200 Crédit</h6>
+                        <img style="position: absolute; top: 34%;margin-left: -11%;" src="assets/img/iconeHardeur.png" alt="">
+                        <p style="position: absolute; top: 57%;margin-left: 50px;color: rgb(117, 114, 114);margin-right: 30px;font-size: 11px;">
+                            Pour les habitués qui désirent 
+                            une souplesse au niveau du prix, 
+                            et profiter à fond de nos 
+                            animatrices en chaleur. 200 minutes 
+                            de jouissance.</p>
+                        <h3 style="position: absolute; top: 72%;margin-left: 42%;color: #a94ede;">99 €</h3>
+                        <img style="position: absolute; top: 86%;margin-left: -14%;" src="assets/img/Achetez.png" alt="">
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <footer style="margin-top: 20px;">
+
+        <div class="row" style="background-image: url('../assets/img/footerbg.png');text-align: center; color: white;background-repeat: no-repeat;
+        background-size: cover;">
+            <div class="col-3">
+            <p><b>Téléphone Rose</b></p>    
+            <p>telrose</p>    
+            <p>telrose</p>    
+            <p>telrose</p>    
+            </div>
+            <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                <p>telrose</p>    
+                <p>telrose</p>    
+                <p>telrose</p>  </div>
+            <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                <p>telrose</p>    
+                <p>telrose</p>    
+                <p>telrose</p>  </div>
+            <div class="col-3"><p><b>Téléphone Rose</b></p>    
+                <p>telrose</p>    
+                <p>telrose</p>    
+                <p>telrose</p>  </div>
+        </div>
+    
+    </footer>
+</div>
+        <script src="/socket.io/socket.io.js"></script>
+    <!-- fin header -->
+    
+   </body>

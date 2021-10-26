@@ -14,6 +14,7 @@ app.controller("usercontroller",function($scope,$http, $timeout){
     $scope.chargement=true;
     $scope.chargementOk=false;
     $scope.messagetonga=false;
+    $scope.user_session=false;
    
 
     $scope.login=function(){
@@ -65,6 +66,7 @@ app.controller("usercontroller",function($scope,$http, $timeout){
 			else{
 				//alert(data.data[0]["id_user"]);
                 $scope.user = data.data;
+                $scope.user_session = true;
                 $scope.user_to_id=data.data[0]["id_user"];
                 $scope.user_to_nom=data.data[0]["nom_user"];
                 $scope.user_to_photo=data.data[0]["photo"];
