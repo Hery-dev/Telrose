@@ -97,7 +97,7 @@ app.use('/',express.static(__dirname+'/'));
 app.post("/save", upload.single("myImg"),(req,res,next)=>{
 	if(req.file){
 		const pathname = req.file.path;
-		var sql = "INSERT INTO user(nom_user,age,password,email,categorie,sexe,apropos,photo,type) VALUES('"+req.body.nom +"','"+req.body.age+"','"+req.body.pass+"','"+req.body.email+"','"+req.body.categorie+"','"+req.body.sexe +"','"+req.body.apropos+"','"+pathname+"',1)";
+		var sql = `INSERT INTO user(nom_user,age,password,email,categorie,sexe,apropos,photo,type) VALUES("`+req.body.nom +`","`+req.body.age+`","`+req.body.pass+`","`+req.body.email+`","`+req.body.categorie+`","`+req.body.sexe +`","`+req.body.apropos+`","`+pathname+`",1)`;
 		connection.query(sql,function(err,resultat){
 			if (err) {
 				console.log(err);
@@ -126,7 +126,7 @@ app.post("/save", upload.single("myImg"),(req,res,next)=>{
 });
 
 app.post("/saveclient",(req,res,next)=>{
-	var sql = "INSERT INTO user(nom_user,password,type,photo) VALUES('"+req.body.nom_user +"','"+req.body.pass+"',2,'public/images/membre.png')";
+	var sql = `INSERT INTO user(nom_user,password,type,photo) VALUES("`+req.body.nom_user +`","`+req.body.pass+`",2,"public/images/membre.png")`;
 	connection.query(sql,function(err,resultat){
 		if (err) {
 			console.log(err);
@@ -134,7 +134,7 @@ app.post("/saveclient",(req,res,next)=>{
 		}
 		else{
 			console.log("succées!");
-			var fect="SELECT * FROM user WHERE nom_user = '"+req.body.nom_user+"';";
+			var fect=`SELECT * FROM user WHERE nom_user = "`+req.body.nom_user+`";`;
 			connection.query(fect, (err,result)=>{
 				req.session.userid=result[0]["id_user"];
 				res.redirect("/membres");
@@ -222,7 +222,7 @@ app.post('/register', urlencodedParser, function(req, res){
 // LOGIN 
 
 app.post('/login', urlencodedParser, function(req, res){
-    var sql = "SELECT * FROM user WHERE nom_user='"+req.body.nom_user +"'AND password='"+req.body.password +"';";
+    var sql = `SELECT * FROM user WHERE nom_user="`+req.body.nom_user +`" AND password="`+req.body.password +`";`;
     connection.query(sql,function(err,resultat){
 		if (err) {
             console.log(err);
@@ -318,7 +318,7 @@ app.get('/listerec/:para', function(req,res){
 
 // Recherche
 app.get('/recherche/:para',function(req,res){
-	var sql="SELECT * FROM user WHERE nom_user LIKE '%"+req.params.para+"%' OR pays LIKE '%"+req.params.para+"%' OR sexe LIKE '%"+req.params.para+"%' OR categorie LIKE '%"+req.params.para+"%'";
+	var sql=`SELECT * FROM user WHERE nom_user LIKE "%`+req.params.para+`%" OR pays LIKE "%`+req.params.para+`%" OR sexe LIKE "%`+req.params.para+`%" OR categorie LIKE "%`+req.params.para+`%";`;
 	connection.query(sql,function(err,resultat){
 		if (err) {
 			res.send('err');
@@ -410,7 +410,7 @@ app.get('/message', function(req,res){
 
 app.post('/sendmes', function(req, res){
 	//console.log(req.body.mes);
-	var sql ="INSERT INTO message (id_user, id_touser, nom_touser, photo_touser, mes, date) VALUES ('"+req.body.id_user+"', '"+req.body.id_touser+"', '"+req.body.nom_touser+"', '"+req.body.photo_touser+"', '"+req.body.mes+"', '23/10/2021');"
+	var sql =`INSERT INTO message (id_user, id_touser, nom_touser, photo_touser, mes, date) VALUES ("`+req.body.id_user+`", "`+req.body.id_touser+`", "`+req.body.nom_touser+`", "`+req.body.photo_touser+`", "`+req.body.mes+`", "23/10/2021");`
 	connection.query(sql,function(err,resultat){
 		if (err) {
 			console.log(err);

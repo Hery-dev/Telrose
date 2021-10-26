@@ -225,8 +225,6 @@ app.controller("usercontroller",function($scope,$http, $timeout){
                                                 `;
                 mesBox.innerHTML=mesCont;*/
                 $scope.messagetous("send");
-                const mesBox = document.getElementById("mesBox");
-                mesBox.scrollTop=mesBox.scrollHeight;
                 socket.emit("message", {
                     id_user:$scope.user_to_id,
                     id_touser:$scope.id_user_to,
@@ -244,8 +242,6 @@ app.controller("usercontroller",function($scope,$http, $timeout){
     socket.on("message", function (data) {
         if($scope.user_to_id==data["id_touser"]){
             $scope.messagetous("send");
-            $scope.sary = data["photo_touser"];
-            $scope.messagetonga=true;
             /*const mesBox = document.getElementById("mesBox");
             const mesCont = `<div class="row" style="margin-right: 30%;margin-left: 5%;">
                                             <div class="col-2">
